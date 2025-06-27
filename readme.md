@@ -1,24 +1,62 @@
-# 1. Клонувати репозиторій (якщо потрібно)
+📄 README.md
+------------
+
+# 🏟️ Marathonbet Results Tracker
+
+Це система для асинхронного збору результатів з Marathonbet з можливістю перегляду через Streamlit-інтерфейс.
+
+## 🔧 Можливості
+
+- Вибір діапазону дат або останніх `N` годин
+- Автоматичне дозавантаження відсутніх днів
+- Streamlit UI з фільтрами
+- FastAPI бекенд
+- MongoDB як сховище
+- Docker/Docker Compose підтримка
+
+## 🚀 Запуск у Docker
+
+### 1. Побудова
+
+```bash
+make build
+```
+
+### 2. Запуск
+
+```bash
+make up
+```
+
+- FastAPI: http://localhost:8000
+- Streamlit: http://localhost:8501
+
+### 3. Зупинка
+
+```bash
+make down
+```
+
+## 💻 Локальний запуск (без Docker)
+
+```bash
 git clone git@github.com:ArtemNemshylov/FavBetTestTask.git
+cd FavBetTestTask
 
-# 2. Створити віртуальне середовище
 python3 -m venv .venv
+source .venv/bin/activate        # або .venv\Scripts\activate на Windows
 
-# 3. Активувати середовище
-source .venv/bin/activate  # Linux/macOS
-.venv\Scripts\activate     # Windows
-
-# 4. Встановити залежності
 pip install --upgrade pip
-
 pip install -r requirements.txt
+```
 
-# 5. Замінити урл бд в src.storage.mongo_storage
-    def __init__(self, mongo_uri="mongodb://mongo:27017", db_name="marathonbet", collection_name="events")
-mongodb://mongo:27017 -> mongodb://localhost:27017
+У `src/storage/mongo_storage.py` змінити:
+```python
+mongo_uri="mongodb://localhost:27017"
+```
 
-# 6. Запустити API
+Потім:
+```bash
 uvicorn src.api.main:app --reload
-
-# 7. Запустити Streamlit UI
 streamlit run src/ui/streamlit_app.py
+```
