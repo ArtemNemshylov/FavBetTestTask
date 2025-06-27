@@ -1,5 +1,5 @@
 # 1. Клонувати репозиторій (якщо потрібно)
-git clone <url>
+git clone <git@github.com:ArtemNemshylov/FavBetTestTask.git>
 
 # 2. Створити віртуальне середовище
 python3 -m venv .venv
